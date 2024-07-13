@@ -1,10 +1,10 @@
 import asyncio
 from bs4 import BeautifulSoup
-from . import vidplay,filemoon
+from . import F2Cloud,filemoon
 from .utils import fetch,error,decode_url
 
 VIDSRC_KEY:str = "QwDHNW5PBtuyt4AP"
-SOURCES:list = ['Vidplay','Filemoon']
+SOURCES:list = ['F2Cloud','Filemoon']
 
 async def get_source(source_id:str,SOURCE_NAME:str) -> str:
     api_request:str = await fetch(f"https://vidsrc.to/ajax/embed/source/{source_id}")
@@ -23,7 +23,7 @@ async def get_stream(source_url:str,SOURCE_NAME:str):
     RESULT = {}
     RESULT['name'] = SOURCE_NAME
     if SOURCE_NAME==SOURCES[0]:
-        RESULT['data'] = await vidplay.handle(source_url)
+        RESULT['data'] = await F2Cloud.handle(source_url)
         return RESULT
     elif SOURCE_NAME==SOURCES[1]:
         RESULT['data'] = await filemoon.handle(source_url)
